@@ -1,31 +1,37 @@
-import React from 'react';
-import apple from '../../../../assets/brand logo/apple.png';
-import samsung from '../../../../assets/brand logo/samsung.webp';
-import oneplus from '../../../../assets/brand logo/oneplus.png';
+import React, { useEffect, useState } from 'react';
 import Category from './Category';
 
 
 const Categories = () => {
-    const brandData = [
-        {
-            id: 1,
-            name: 'APPLE',
-            description: 'Best good condition apple phones of various series are available in your desire budget.',
-            img: apple
-        },
-        {
-            id: 2,
-            name: 'SAMSUNG',
-            description: 'Best good condition Samsung phones of various series phones are available in your desire budget.',
-            img: samsung
-        },
-        {
-            id: 3,
-            name: 'ONE PLUS',
-            description: 'Best good condition One plus phones of various series phones are available in your desire budget.',
-            img: oneplus
-        },
-    ]
+    const [brands, setBrands] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/brands')
+            .then(res => res.json())
+            .then(data => {
+                setBrands(data)
+                console.log(data)
+            })
+    }, [])
+    // const brandData = [
+    //     {
+    //         id: 1,
+    //         name: 'APPLE',
+    //         description: 'Best good condition apple phones of various series are available in your desire budget.',
+    //         img: apple
+    //     },
+    //     {
+    //         id: 2,
+    //         name: 'SAMSUNG',
+    //         description: 'Best good condition Samsung phones of various series phones are available in your desire budget.',
+    //         img: samsung
+    //     },
+    //     {
+    //         id: 3,
+    //         name: 'ONE PLUS',
+    //         description: 'Best good condition One plus phones of various series phones are available in your desire budget.',
+    //         img: oneplus
+    //     },
+    // ]
     return (
         <div className='mt-3'>
             <div>
@@ -34,7 +40,7 @@ const Categories = () => {
             </div>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-3'>
                 {
-                    brandData.map(brand => <Category
+                    brands?.map(brand => <Category
                         key={brand.id}
                         brand={brand}
                     ></Category>)

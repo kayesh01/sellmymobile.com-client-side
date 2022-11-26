@@ -25,8 +25,9 @@ const router = createBrowserRouter([
                 element: <SignUp></SignUp>
             },
             {
-                path: '/category/:id',
-                element: <CategoryWisePhone></CategoryWisePhone>
+                path: '/brands/:id',
+                element: <CategoryWisePhone></CategoryWisePhone>,
+                loader: ({ params }) => fetch(`http://localhost:5000/brands/${params.id}`)
             }
         ]
     },

@@ -1,13 +1,38 @@
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm()
+    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { signIn, googleSignIn } = useContext(AuthContext);
+    const [loginError, setLoginError] = useState('');
 
     const handleLogin = data => {
         console.log(data);
+        setLoginError('');
+        signIn(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(err => {
+                console.log(err.message)
+                setLoginError(err.message);
+            });
+    }
+    const handleGoogleLogin = () => {
+        googleSignIn()
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
     return (
+
         <div className='h-[600px] flex justify-center items-center'>
             <div className='w-96 p-7'>
                 <h2 className='text-3xl font-bold text-center'>Login</h2>
@@ -24,10 +49,13 @@ const Login = () => {
                         <label className="label"><span className="label-text">Forget Password?</span></label>
                     </div>
                     <input className='btn btn-accent w-full' value='LogIn' type="submit" />
+                    <div>
+                        {loginError && <p className='text-red-500'>{loginError}</p>}
+                    </div>
                 </form>
                 <p className='mt-3'>New to sellmymobile.com ? <Link className='text-accent' to='/signup'>Create a new account.</Link></p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                <button onClick={handleGoogleLogin} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Phone = ({ phone, setBookPhone }) => {
-    const { _id, name, location, resalePrice, originalPrice, YearsOfUse, img, verified, postedTime, sellerName } = phone;
+    const { name, location, resalePrice, originalPrice, YearsOfUse, img, verified, postedTime, sellerName } = phone;
     return (
         <div className="card w-96 bg-base-100 shadow-xl">
             <figure className="px-10 pt-10">

@@ -17,6 +17,7 @@ const CategoryWisePhone = () => {
             }
             {bookPhone && <BookingModal
                 bookPhone={bookPhone}
+                setBookPhone={setBookPhone}
             ></BookingModal>}
         </div>
     );

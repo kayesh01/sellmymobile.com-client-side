@@ -26,7 +26,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/brands/:id',
-                element: <CategoryWisePhone></CategoryWisePhone>,
+                element: <PrivateRoute><CategoryWisePhone></CategoryWisePhone></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/brands/${params.id}`)
             }
         ]

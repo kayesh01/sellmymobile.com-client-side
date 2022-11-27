@@ -12,26 +12,7 @@ const Categories = () => {
                 console.log(data)
             })
     }, [])
-    // const brandData = [
-    //     {
-    //         id: 1,
-    //         name: 'APPLE',
-    //         description: 'Best good condition apple phones of various series are available in your desire budget.',
-    //         img: apple
-    //     },
-    //     {
-    //         id: 2,
-    //         name: 'SAMSUNG',
-    //         description: 'Best good condition Samsung phones of various series phones are available in your desire budget.',
-    //         img: samsung
-    //     },
-    //     {
-    //         id: 3,
-    //         name: 'ONE PLUS',
-    //         description: 'Best good condition One plus phones of various series phones are available in your desire budget.',
-    //         img: oneplus
-    //     },
-    // ]
+
     return (
         <div className='mt-3'>
             <div>

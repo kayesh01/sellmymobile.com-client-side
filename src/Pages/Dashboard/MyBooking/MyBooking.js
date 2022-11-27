@@ -39,7 +39,7 @@ const MyBooking = () => {
                                     <img src={booking.phoneImg} alt="Avatar Tailwind CSS Component" />
                                 </div></td>
                                 <td>{booking.price}</td>
-                                <td>pay</td>
+                                <td><button className='btn btn-xs btn-outline'>Pay</button></td>
                             </tr>)
                         }
                     </tbody>

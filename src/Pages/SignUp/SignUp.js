@@ -11,19 +11,22 @@ const SignUp = () => {
     const navigate = useNavigate()
 
     const handleSignUp = data => {
-        console.log(data);
+        // const type = data.type
+        // console.log(data);
         setSignUpError('');
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
+                // console.log(user);
                 toast('User created successfully')
                 const userInfo = {
                     displayName: data.name
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        navigate('/');
+                        saveUser(data.name, data.email, data.type);
+                        console.log(data.type);
+
                     })
                     .catch(err => console.log(err))
             })
@@ -31,6 +34,21 @@ const SignUp = () => {
                 console.log(err)
                 setSignUpError(err.message)
             });
+    }
+    const saveUser = (name, email, type) => {
+        const user = { name, email, type };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                navigate('/');
+            })
     }
 
     return (

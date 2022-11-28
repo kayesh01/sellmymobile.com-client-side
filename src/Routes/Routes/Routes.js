@@ -2,13 +2,16 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import CategoryWisePhone from "../../Pages/CategoryWisePhone/CategoryWisePhone";
+import AddPhone from "../../Pages/Dashboard/AddPhone/AddPhone";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
 
 import MyBooking from "../../Pages/Dashboard/MyBooking/MyBooking";
+import MyPhones from "../../Pages/Dashboard/MyPhones/MyPhones";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
@@ -45,12 +48,21 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/allsellers',
-                element: <AllSellers></AllSellers>
+                element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
             },
             {
                 path: '/dashboard/allbuyers',
-                element: <AllBuyers></AllBuyers>
+                element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>,
             },
+            {
+                path: '/dashboard/addphone',
+                element: <AdminRoute><AddPhone></AddPhone></AdminRoute>,
+            },
+            {
+                path: '/dashboard/myphone',
+                element: <AdminRoute><MyPhones></MyPhones></AdminRoute>,
+            },
+
         ]
     }
 ])

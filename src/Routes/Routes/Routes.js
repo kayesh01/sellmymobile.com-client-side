@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
+import Blog from "../../Pages/Blog/Blog";
 import CategoryWisePhone from "../../Pages/CategoryWisePhone/CategoryWisePhone";
 import AddPhone from "../../Pages/Dashboard/AddPhone/AddPhone";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
@@ -10,9 +11,11 @@ import MyBooking from "../../Pages/Dashboard/MyBooking/MyBooking";
 import MyPhones from "../../Pages/Dashboard/MyPhones/MyPhones";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
+import NotFound from "../../Pages/NotFound/NotFound";
 import SignUp from "../../Pages/SignUp/SignUp";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import SellerRoute from "../SellerRoute/SellerRoute";
 
 const router = createBrowserRouter([
     {
@@ -32,9 +35,17 @@ const router = createBrowserRouter([
                 element: <SignUp></SignUp>
             },
             {
+                path: '/blog',
+                element: <Blog></Blog>
+            },
+            {
                 path: '/brands/:id',
                 element: <PrivateRoute><CategoryWisePhone></CategoryWisePhone></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/brands/${params.id}`)
+            },
+            {
+                path: '/*',
+                element: <NotFound></NotFound>
             }
         ]
     },
@@ -56,11 +67,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/addphone',
-                element: <AdminRoute><AddPhone></AddPhone></AdminRoute>,
+                element: <SellerRoute><AddPhone></AddPhone></SellerRoute>,
             },
             {
                 path: '/dashboard/myphone',
-                element: <AdminRoute><MyPhones></MyPhones></AdminRoute>,
+                element: <SellerRoute><MyPhones></MyPhones></SellerRoute>,
             },
 
         ]

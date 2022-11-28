@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthProvider';
 
 const AddPhone = () => {
+    const { user } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const handleAddDoctor = data => {
@@ -14,7 +16,11 @@ const AddPhone = () => {
             location: data.location,
             img: data.img,
             resalePrice: data.resalePrice,
-            originalPrice: data.originalPrice
+            originalPrice: data.originalPrice,
+            YearsOfUse: data.YearsOfUse,
+            seller: user.email,
+            sellerName: user.displayName,
+            verified: user.verified
         }
         fetch('http://localhost:5000/savephones', {
             method: 'POST',
